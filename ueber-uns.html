@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über uns | Oezpromotion - IT Advisory & Consulting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           DESIGN-SYSTEM (BASIS)
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --bg-dark: #0b0f19;
+            --bg-card: #141b2d;
+            --primary: #00f2ea; /* Cyan Accent */
+            --secondary: #7c3aed; /* Deep Purple */
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-light: rgba(255, 255, 255, 0.1);
+            --gradient-main: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%);
+            
+            --font-head: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --spacing-container: 1200px;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* HEADER */
+        header {
+            padding: 2rem 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            color: var(--primary);
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 1;
+            color: var(--primary);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 5rem 0 2rem;
+            background: #05080d;
+            border-top: 1px solid var(--border-light);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+        .footer-brand p {
+            max-width: 300px;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .footer-col h5 {
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        .footer-col ul li a {
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+        .footer-col ul li a:hover {
+            color: var(--primary);
+        }
+        .address-box {
+            font-style: normal;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: var(--spacing-container);
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            font-family: var(--font-head);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        .btn:hover {
+            color: var(--bg-dark);
+        }
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           PAGE SPECIFIC STYLES (ABOUT US)
+           ═══════════════════════════════════════════════════════════════ */
+        
+        /* Page Header */
+        .page-header {
+            padding-top: 180px;
+            padding-bottom: 80px;
+            position: relative;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(11, 15, 25, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .ph-subtitle {
+            color: var(--primary);
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .ph-title {
+            font-family: var(--font-head);
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ph-intro {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            border-left: 3px solid var(--primary);
+            padding-left: 2rem;
+        }
+
+        /* Section: The Story */
+        .section-story {
+            padding: 8rem 0;
+        }
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        .story-content h2 {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+        .story-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+        .story-image {
+            position: relative;
+        }
+        .story-image img {
+            width: 100%;
+            border-radius: 4px;
+            filter: grayscale(100%) contrast(1.1);
+            transition: var(--transition);
+        }
+        .story-image:hover img {
+            filter: grayscale(0%) contrast(1);
+        }
+        .story-image::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--primary);
+            z-index: -1;
+        }
+
+        /* Section: Stats */
+        .section-stats {
+            background: var(--bg-card);
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+        .stats-wrapper {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-family: var(--font-head);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Section: Philosophy/Values */
+        .section-values {
+            padding: 8rem 0;
+            position: relative;
+        }
+        .values-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        .values-header h2 {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .value-card {
+            background: rgba(20, 27, 45, 0.6);
+            border: 1px solid var(--border-light);
+            padding: 3rem 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            background: var(--bg-card);
+        }
+        .value-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        .value-card h3 {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .value-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-main);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+        .value-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* CTA Section */
+        .section-cta {
+            padding: 6rem 0;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg-dark), #0f1420);
+        }
+        .section-cta h2 {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .story-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .values-grid { grid-template-columns: 1fr; }
+            .ph-title { font-size: 2.5rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .stats-wrapper { gap: 2rem; justify-content: center; }
+            .nav-links { display: none; } /* Mobile menu implementation omitted for brevity as per strict instruction adherence */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Oez<span>promotion</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="ueber-uns.html" class="active">Über uns</a></li>
+                    <li><a href="leistungen.html">Leistungen</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+                <a href="kontakt.html" class="btn">Projekt Starten</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER / HERO -->
+    <section class="page-header">
+        <div class="container">
+            <span class="ph-subtitle">Wer wir sind</span>
+            <h1 class="ph-title">Architekten der<br>digitalen Zukunft.</h1>
+            <p class="ph-intro">
+                Oezpromotion ist nicht nur eine Beratung. Wir sind Ihr strategischer Kompass in einer komplexen Technologielandschaft. Von Gelsenkirchen aus transformieren wir Unternehmen im gesamten DACH-Raum.
+            </p>
+        </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <section class="section-stats">
+        <div class="container">
+            <div class="stats-wrapper">
+                <div class="stat-item">
+                    <span class="stat-number">12+</span>
+                    <span class="stat-label">Jahre Erfahrung</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">85+</span>
+                    <span class="stat-label">Erfolgreiche Projekte</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Fokus auf Qualität</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Support & Monitoring</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE STORY SECTION -->
+    <section class="section-story">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-image">
+                    <!-- Real Image from Unsplash (Office/Tech vibe) -->
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modernes Büro von Oezpromotion">
+                </div>
+                <div class="story-content">
+                    <h2>Vom Code zur Strategie</h2>
+                    <p>
+                        Gegründet mit der Vision, die Lücke zwischen reiner Softwareentwicklung und strategischer Unternehmensberatung zu schließen, hat sich Oezpromotion zu einem führenden Partner für IT-Advisory entwickelt.
+                    </p>
+                    <p>
+                        Wir glauben daran, dass Technologie kein Selbstzweck ist. Jede Zeile Code, jede Cloud-Architektur und jede Schnittstelle muss einem klaren geschäftlichen Ziel dienen. In unserem Hauptsitz in der Gaabelsbergerstraße in Gelsenkirchen arbeiten Analysten, Entwickler und Strategen Hand in Hand.
+                    </p>
+                    <p>
+                        Unser Ansatz ist radikal ehrlich: Wir empfehlen nicht das, was gerade im Trend liegt, sondern das, was Ihr Unternehmen nachhaltig voranbringt.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES SECTION -->
+    <section class="section-values">
+        <div class="container">
+            <div class="values-header">
+                <h2>Unsere Prinzipien</h2>
+                <p style="color: var(--text-muted);">Das Fundament unserer Arbeit und unser Versprechen an Sie.</p>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">01</div>
+                    <h3>Präzision</h3>
+                    <p>Im Software Consulting gibt es keinen Raum für Ungefähres. Wir analysieren tiefgreifend, planen exakt und setzen pixelgenau um. Qualität ist für uns nicht verhandelbar.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">02</div>
+                    <h3>Transparenz</h3>
+                    <p>Keine versteckten Kosten, kein "Fachchinesisch". Wir kommunizieren offen, verständlich und auf Augenhöhe. Sie wissen zu jedem Zeitpunkt, wo Ihr Projekt steht.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">03</div>
+                    <h3>Innovation</h3>
+                    <p>Wir ruhen uns nicht auf bestehendem Wissen aus. Unser Team bildet sich ständig weiter, um Ihnen die modernsten und sichersten Lösungen (State-of-the-Art) zu bieten.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / CONTACT TEASER -->
+    <section class="section-cta">
+        <div class="container">
+            <h2>Bereit für den nächsten Schritt?</h2>
+            <p style="color: var(--text-muted); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Lassen Sie uns gemeinsam herausfinden, wie wir Ihre digitale Infrastruktur optimieren können. Ein erstes Gespräch kostet Sie nichts, bringt aber oft entscheidende Erkenntnisse.
+            </p>
+            <a href="kontakt.html" class="btn">Gespräch vereinbaren</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">Oez<span>promotion</span></a>
+                    <p>Ihr strategischer Partner für Software Consulting und IT Advisory Services. Wir gestalten die digitale Zukunft Ihres Unternehmens.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h5>Navigation</h5>
+                    <ul>
+                        <li><a href="ueber-uns.html">Über uns</a></li>
+                        <li><a href="leistungen.html">Leistungen</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                        <li><a href="impressum.html">Impressum</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Kontakt</h5>
+                    <address class="address-box">
+                        Oezpromotion<br>
+                        Gaabelsbergerstr. 16<br>
+                        45879 Gelsenkirchen<br>
+                        Deutschland
+                    </address>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Oezpromotion. Alle Rechte vorbehalten.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

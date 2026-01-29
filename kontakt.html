@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt aufnehmen | Oezpromotion - IT Advisory & Consulting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           DESIGN-SYSTEM (BASIS)
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --bg-dark: #0b0f19;
+            --bg-card: #141b2d;
+            --primary: #00f2ea; /* Cyan Accent */
+            --secondary: #7c3aed; /* Deep Purple */
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-light: rgba(255, 255, 255, 0.1);
+            --gradient-main: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%);
+            
+            --font-head: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --spacing-container: 1200px;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* HEADER */
+        header {
+            padding: 2rem 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -1px;
+        }
+        .logo span {
+            color: var(--primary);
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 1;
+            color: var(--primary);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* CONTAINER & BTN */
+        .container {
+            width: 90%;
+            max-width: var(--spacing-container);
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-family: var(--font-head);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            cursor: pointer;
+            background: transparent;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        .btn:hover {
+            color: var(--bg-dark);
+        }
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           PAGE SPECIFIC STYLES (KONTAKT)
+           ═══════════════════════════════════════════════════════════════ */
+        
+        main {
+            padding-top: 180px;
+            padding-bottom: 5rem;
+            flex: 1;
+            position: relative;
+        }
+
+        /* Background Glow Effect */
+        .glow-bg {
+            position: absolute;
+            top: 10%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(11, 15, 25, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .contact-header {
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-family: var(--font-head);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        /* GRID LAYOUT */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* INFO CARD (LEFT) */
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-main);
+        }
+
+        .info-group {
+            margin-bottom: 3rem;
+        }
+
+        .info-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-family: var(--font-head);
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .info-value {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .address-value {
+            display: block;
+        }
+
+        /* DECORATIVE MAP VISUALIZATION (CSS ONLY) */
+        .cyber-map {
+            margin-top: 3rem;
+            width: 100%;
+            height: 150px;
+            background-image: 
+                radial-gradient(var(--border-light) 1px, transparent 1px),
+                radial-gradient(var(--border-light) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            border: 1px solid var(--border-light);
+            position: relative;
+            opacity: 0.5;
+        }
+
+        .map-pin {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--primary);
+        }
+        .map-pin::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { width: 12px; height: 12px; opacity: 1; }
+            100% { width: 60px; height: 60px; opacity: 0; }
+        }
+
+        /* FORM (RIGHT) */
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .form-full {
+            grid-column: 1 / -1;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-family: var(--font-head);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-light);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: var(--transition);
+            outline: none;
+            border-radius: 0;
+            -webkit-appearance: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            background: rgba(20, 27, 45, 0.8);
+            box-shadow: 0 0 15px rgba(0, 242, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 180px;
+        }
+
+        select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1rem;
+        }
+
+        /* CHECKBOX CUSTOM */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            flex-shrink: 0;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 5rem 0 2rem;
+            background: #05080d;
+            margin-top: auto;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+        .footer-brand p {
+            max-width: 300px;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .footer-col h5 {
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        .footer-col ul li a {
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        .address-box {
+            font-style: normal;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+        .copyright {
+            border-top: 1px solid var(--border-light);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .info-card {
+                order: 2;
+            }
+            .contact-form {
+                order: 1;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none; /* In production would need mobile menu JS */
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Oez<span>promotion</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="leistungen.html">Leistungen</a></li>
+                    <li><a href="kontakt.html" class="active">Kontakt</a></li>
+                </ul>
+                <a href="kontakt.html" class="btn">Projekt Starten</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="glow-bg"></div>
+        <div class="container">
+            
+            <div class="contact-header">
+                <h1>Lassen Sie uns Ihre<br>Vision realisieren.</h1>
+                <p class="subtitle">Wir sind bereit für die nächste Herausforderung. Erzählen Sie uns von Ihrem Vorhaben und wir entwickeln gemeinsam die optimale Strategie für Ihr Unternehmen.</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Linke Spalte: Kontaktinfos -->
+                <div class="info-card">
+                    <div class="info-group">
+                        <span class="info-label">Hauptsitz</span>
+                        <address class="info-value address-value">
+                            Oezpromotion<br>
+                            Gaabelsbergerstr. 16<br>
+                            45879 Gelsenkirchen<br>
+                            Deutschland
+                        </address>
+                    </div>
+
+                    <div class="info-group">
+                        <span class="info-label">Geschäftszeiten</span>
+                        <div class="info-value">
+                            Mo - Fr: 09:00 - 18:00<br>
+                            <span style="font-size: 0.9rem; color: var(--text-muted);">Termine nach Vereinbarung</span>
+                        </div>
+                    </div>
+
+                    <div class="info-group">
+                        <span class="info-label">Bereich</span>
+                        <div class="info-value">
+                            Software Consulting<br>
+                            IT Advisory Services
+                        </div>
+                    </div>
+
+                    <!-- Dekorative Map-Visualisierung (da keine API) -->
+                    <div class="cyber-map">
+                        <div class="map-pin"></div>
+                    </div>
+                </div>
+
+                <!-- Rechte Spalte: Formular -->
+                <form class="contact-form" action="#" method="POST">
+                    <div class="input-group">
+                        <label for="name">Ihr Name</label>
+                        <input type="text" id="name" name="name" required placeholder="z.B. Max Mustermann">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="company">Unternehmen</label>
+                        <input type="text" id="company" name="company" placeholder="Firmenname">
+                    </div>
+
+                    <div class="input-group form-full">
+                        <label for="email">E-Mail Adresse</label>
+                        <input type="email" id="email" name="email" required placeholder="name@unternehmen.de">
+                    </div>
+
+                    <div class="input-group form-full">
+                        <label for="service">Worum geht es?</label>
+                        <select id="service" name="service">
+                            <option value="" disabled selected>Bitte wählen Sie ein Thema</option>
+                            <option value="consulting">Strategische IT-Beratung</option>
+                            <option value="development">Software Entwicklung</option>
+                            <option value="advisory">Digital Transformation</option>
+                            <option value="other">Sonstiges Anliegen</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group form-full">
+                        <label for="message">Ihre Nachricht</label>
+                        <textarea id="message" name="message" required placeholder="Beschreiben Sie kurz Ihr Projekt oder Ihre Herausforderung..."></textarea>
+                    </div>
+
+                    <div class="checkbox-group form-full">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">Ich stimme zu, dass meine Angaben zur Kontaktaufnahme und Zuordnung für eventuelle Rückfragen gespeichert werden. Diese Einwilligung ist jederzeit widerrufbar.</label>
+                    </div>
+
+                    <div class="form-full">
+                        <button type="submit" class="btn" style="width: 100%;">Nachricht Senden</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">Oez<span>promotion</span></a>
+                    <p>Ihr strategischer Partner für Software Consulting und IT Advisory Services. Wir gestalten die digitale Zukunft Ihres Unternehmens.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h5>Navigation</h5>
+                    <ul>
+                        <li><a href="ueber-uns.html">Über uns</a></li>
+                        <li><a href="leistungen.html">Leistungen</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                        <li><a href="impressum.html">Impressum</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Kontakt</h5>
+                    <address class="address-box">
+                        Oezpromotion<br>
+                        Gaabelsbergerstr. 16<br>
+                        45879 Gelsenkirchen<br>
+                        Deutschland
+                    </address>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Oezpromotion. Alle Rechte vorbehalten.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

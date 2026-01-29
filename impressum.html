@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | Oezpromotion - IT Advisory Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0b0f19;
+            --bg-card: #141b2d;
+            --primary: #00f2ea; /* Cyan Accent */
+            --secondary: #7c3aed; /* Deep Purple */
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-light: rgba(255, 255, 255, 0.1);
+            --gradient-main: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%);
+            
+            --font-head: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --spacing-container: 1200px;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        /* HEADER */
+        header {
+            padding: 2rem 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            color: var(--primary);
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            opacity: 0.8;
+            color: var(--text-main);
+        }
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 1;
+            color: var(--primary);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            font-family: var(--font-head);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        .btn:hover {
+            color: var(--bg-dark);
+        }
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        /* CONTAINER */
+        .container {
+            width: 90%;
+            max-width: var(--spacing-container);
+            margin: 0 auto;
+        }
+
+        /* IMPRESSUM SPECIFIC STYLES */
+        .page-hero {
+            padding-top: 200px;
+            padding-bottom: 80px;
+            position: relative;
+        }
+        
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(11, 15, 25, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: var(--font-head);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--primary);
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .legal-content {
+            padding-bottom: 120px;
+        }
+
+        .legal-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+        }
+
+        .sidebar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 2.5rem;
+            position: sticky;
+            top: 120px;
+            border-radius: 4px;
+        }
+
+        .sidebar-card h3 {
+            font-family: var(--font-head);
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .info-block {
+            margin-bottom: 2rem;
+        }
+
+        .info-label {
+            display: block;
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .info-value {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .content-card {
+            background: rgba(20, 27, 45, 0.5);
+            border-left: 2px solid var(--primary);
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .content-card h2 {
+            font-family: var(--font-head);
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .content-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 5rem 0 2rem;
+            background: #05080d;
+            border-top: 1px solid var(--border-light);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+        .footer-brand p {
+            max-width: 300px;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .footer-col h5 {
+            color: #fff;
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        .footer-col ul li a {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        .address-box {
+            font-style: normal;
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        .copyright {
+            border-top: 1px solid var(--border-light);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            .legal-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-card {
+                position: relative;
+                top: 0;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .nav-links {
+                display: none; /* Mobile menu logic omitted for brevity as per prompt focus */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Oez<span>promotion</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Startseite</a></li>
+                    <li><a href="ueber-uns.html">Über uns</a></li>
+                    <li><a href="leistungen.html">Leistungen</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+                <a href="kontakt.html" class="btn">Projekt Starten</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Header Section -->
+        <section class="page-hero">
+            <div class="container">
+                <span class="subtitle">Rechtliches</span>
+                <h1>Impressum</h1>
+                <p style="color: var(--text-muted); max-width: 600px; font-size: 1.1rem;">
+                    Transparenz ist das Fundament unserer Arbeit. Hier finden Sie alle rechtlich relevanten Informationen zu Oezpromotion.
+                </p>
+            </div>
+        </section>
+
+        <!-- Main Legal Content -->
+        <section class="legal-content">
+            <div class="container">
+                <div class="legal-grid">
+                    
+                    <!-- Sidebar with Hard Data -->
+                    <aside>
+                        <div class="sidebar-card">
+                            <h3>Angaben gemäß § 5 TMG</h3>
+                            
+                            <div class="info-block">
+                                <span class="info-label">Unternehmen</span>
+                                <div class="info-value">Oezpromotion</div>
+                            </div>
+
+                            <div class="info-block">
+                                <span class="info-label">Vertreten durch</span>
+                                <div class="info-value">Fatih Özmen</div>
+                            </div>
+
+                            <div class="info-block">
+                                <span class="info-label">Anschrift</span>
+                                <div class="info-value">
+                                    Gaabelsbergerstr. 16<br>
+                                    45879 Gelsenkirchen<br>
+                                    Deutschland
+                                </div>
+                            </div>
+
+                            <div class="info-block" style="margin-bottom: 0;">
+                                <span class="info-label">Kontakt</span>
+                                <div class="info-value" style="font-size: 0.95rem; opacity: 0.8;">
+                                    Für Projektanfragen nutzen Sie bitte unser Kontaktformular.
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Text Content -->
+                    <div class="content-area">
+                        <div class="content-card">
+                            <h2>Haftung für Inhalte</h2>
+                            <p>
+                                Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+                            </p>
+                            <p>
+                                Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+                            </p>
+                        </div>
+
+                        <div class="content-card">
+                            <h2>Haftung für Links</h2>
+                            <p>
+                                Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+                            </p>
+                            <p>
+                                Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+                            </p>
+                        </div>
+
+                        <div class="content-card">
+                            <h2>Urheberrecht</h2>
+                            <p>
+                                Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
+                            </p>
+                            <p>
+                                Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+                            </p>
+                        </div>
+                        
+                        <div class="content-card" style="border-left-color: var(--secondary);">
+                            <h2>Streitschlichtung</h2>
+                            <p>
+                                Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr.<br>
+                                Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">Oez<span>promotion</span></a>
+                    <p>Ihr strategischer Partner für Software Consulting und IT Advisory Services. Wir gestalten die digitale Zukunft Ihres Unternehmens.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h5>Navigation</h5>
+                    <ul>
+                        <li><a href="ueber-uns.html">Über uns</a></li>
+                        <li><a href="leistungen.html">Leistungen</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                        <li><a href="impressum.html" style="color: var(--primary);">Impressum</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Kontakt</h5>
+                    <address class="address-box">
+                        Oezpromotion<br>
+                        Gaabelsbergerstr. 16<br>
+                        45879 Gelsenkirchen<br>
+                        Deutschland
+                    </address>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Oezpromotion. Alle Rechte vorbehalten.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
